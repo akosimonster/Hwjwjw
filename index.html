@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stylized Text Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      text-align: center;
+    }
+    textarea, input {
+      width: 80%;
+      margin: 10px 0;
+      padding: 10px;
+      font-size: 16px;
+    }
+    .output {
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: bold;
+      font-family: 'Arial', sans-serif;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Stylized Text Generator</h1>
+  <textarea id="normalText" placeholder="Enter your text here..."></textarea><br>
+  <div class="output">
+    <span id="stylizedText"></span>
+    <br>
+    <button onclick="copyText()">Copy</button>
+    <button onclick="clearText()">Clear</button>
+  </div>
+
+  <script>
+    function toSmallCaps(text) {
+      const map = {
+        A: 'ᴀ', B: 'ʙ', C: 'ᴄ', D: 'ᴅ', E: 'ᴇ', F: 'ғ', G: 'ɢ', H: 'ʜ', I: 'ɪ',
+        J: 'ᴊ', K: 'ᴋ', L: 'ʟ', M: 'ᴍ', N: 'ɴ', O: 'ᴏ', P: 'ᴘ', Q: 'ǫ', R: 'ʀ',
+        S: 's', T: 'ᴛ', U: 'ᴜ', V: 'ᴠ', W: 'ᴡ', X: 'x', Y: 'ʏ', Z: 'ᴢ',
+        a: 'ᴀ', b: 'ʙ', c: 'ᴄ', d: 'ᴅ', e: 'ᴇ', f: 'ғ', g: 'ɢ', h: 'ʜ', i: 'ɪ',
+        j: 'ᴊ', k: 'ᴋ', l: 'ʟ', m: 'ᴍ', n: 'ɴ', o: 'ᴏ', p: 'ᴘ', q: 'ǫ', r: 'ʀ',
+        s: 's', t: 'ᴛ', u: 'ᴜ', v: 'ᴠ', w: 'ᴡ', x: 'x', y: 'ʏ', z: 'ᴢ'
+      };
+      return text.split('').map(char => map[char] || char).join('');
+    }
+
+    document.getElementById('normalText').addEventListener('input', function () {
+      const inputText = this.value;
+      const stylizedText = toSmallCaps(inputText);
+      document.getElementById('stylizedText').innerText = stylizedText;
+    });
+
+    function copyText() {
+      const textToCopy = document.getElementById('stylizedText').innerText;
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        alert('Stylized text copied to clipboard!');
+      });
+    }
+
+    function clearText() {
+      document.getElementById('normalText').value = '';
+      document.getElementById('stylizedText').innerText = '';
+    }
+  </script>
+</body>
+</html>
