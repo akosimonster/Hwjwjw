@@ -56,14 +56,12 @@
     document.getElementById('normalText').addEventListener('input', function () {
       const inputText = this.value;
       const stylizedText = toSmallCaps(inputText);
-      document.getElementById('stylizedText').innerText = stylizedText;
+      document.getElementById('stylizedText').innerText = `🔰${stylizedText}`;
     });
 
     function copyText() {
       const textToCopy = document.getElementById('stylizedText').innerText;
-      navigator.clipboard.writeText(textToCopy).then(() => {
-        alert('Stylized text copied to clipboard!');
-      });
+      navigator.clipboard.writeText(textToCopy);
     }
 
     function clearText() {
